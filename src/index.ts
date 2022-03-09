@@ -1,10 +1,9 @@
-import path from 'path';
-
 import fastify from 'fastify';
-import now from 'fastify-now';
+import blogRoutes from './routes/index'
 
 // Load env vars
 import loadConfig from './lib/config';
+import db from './db';
 loadConfig();
 
 export async function createServer() {
@@ -14,9 +13,8 @@ export async function createServer() {
     },
   });
 
-  server.register(now, {
-    routesFolder: path.join(__dirname, './routes'),
-  });
+  server.register(blogRoutes);
+  server.register(db, {uri: process.env.MONGODB_URI});
 
   await server.ready();
   return server;

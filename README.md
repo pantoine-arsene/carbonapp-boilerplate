@@ -12,7 +12,6 @@ I tried to keep it as lean as possible (you can notice there is no DB connection
 - Development environment
 - Tests (using Jest)
 - Fastify
-- File based routing (using fastify-now)
 - Env vars config
 - CI with github actions
 - Docker image
@@ -33,10 +32,6 @@ npm install
 ```bash
 npm run dev
 ```
-
-## File Based Routing
-
-Using [fastify-now](https://github.com/yonathan06/fastify-now) for file based routing
 
 ## Env vars
 

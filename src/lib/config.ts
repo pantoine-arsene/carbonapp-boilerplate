@@ -13,6 +13,7 @@ const ConfigSchema = Type.Object({
   NODE_ENV: Type.Enum(NodeEnv),
   API_HOST: Type.String(),
   API_PORT: Type.String(),
+  MONGODB_URI: Type.String(),
 });
 
 export type Config = Static<typeof ConfigSchema>;
