@@ -27,6 +27,6 @@ jobs:
       run: npm run check:types
     - name: Build
       run: npm run build
-    - name: Test
-      run: npm test
+#    - name: Test
+#      run: npm test
       
