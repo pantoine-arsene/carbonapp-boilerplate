@@ -1,20 +1,14 @@
-import { Schema, Document, model, Model } from 'mongoose';
+import { Schema, model } from 'mongoose';
+import { CommonDocument } from './common'
+
 export interface BlogAttrs {
     title: string;
     content: string;
     category: string;
 }
 
-export interface BlogModel extends Model<BlogDocument> {
-    addOne(doc: BlogAttrs): BlogDocument;
-}
-export interface BlogDocument extends Document {
-    title: string;
-    content: string;
-    category: string;
-    createdAt: string;
-    updatedAt: string;
-}
+export interface BlogDocument extends CommonDocument, BlogAttrs {}
+
 export const blogSchema: Schema = new Schema(
     {
         title: {
@@ -35,7 +29,4 @@ export const blogSchema: Schema = new Schema(
     }
 );
 
-blogSchema.statics.addOne = (doc: BlogAttrs) => {
-    return new Blog(doc);
-};
-export const Blog = model<BlogDocument, BlogModel>('Blog', blogSchema);
+export const Blog = model<BlogDocument>('Blog', blogSchema);
