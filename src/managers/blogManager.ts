@@ -16,7 +16,7 @@ export class BlogManager {
 
     public create = async (createBlogDto: BlogAttrs): Promise<BlogDocument> => {
         const { Blog } = this.server.db.models;
-        return Blog.create(createBlogDto);
+        return Blog.addOne(createBlogDto);
     }
 
     public getById = async (id: string): Promise<BlogDocument | null> => {
