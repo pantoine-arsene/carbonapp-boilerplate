@@ -5,6 +5,7 @@ import {
 import fp from 'fastify-plugin';
 import { Db } from '../db';
 import { BlogRoutes } from './blogRoutes';
+import { ProjectRoutes } from './projectRoutes';
 
 // Declaration merging
 declare module 'fastify' {
@@ -24,5 +25,6 @@ const Route: FastifyPluginAsync = async (server: FastifyInstance) => {
       }
     });
     BlogRoutes(server);
+    ProjectRoutes(server);
 };
 export default fp(Route);
