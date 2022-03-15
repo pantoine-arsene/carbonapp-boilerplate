@@ -5,6 +5,8 @@ export interface ProjectAttrs {
     title: string;
     description: string;
     images: Array<string>;
+    location: string;
+    amountCarbon: number;
 }
 
 export interface ProjectDocument extends CommonDocument, ProjectAttrs {}
@@ -21,6 +23,14 @@ export const projectSchema: Schema = new Schema(
         },
         description: {
             type: String,
+            required: true
+        },
+        location: {
+            type: String,
+            required: true
+        },
+        amountCarbon: {
+            type: Number,
             required: true
         },
         images: [{

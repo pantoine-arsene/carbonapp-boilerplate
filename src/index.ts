@@ -1,5 +1,6 @@
 import fastify from 'fastify';
-import blogRoutes from './routes/index'
+import blogRoutes from './routes/index';
+import fastifyCors from 'fastify-cors';
 
 // Load env vars
 import loadConfig from './lib/config';
@@ -15,6 +16,7 @@ export async function createServer() {
 
   server.register(blogRoutes);
   server.register(db, {uri: process.env.MONGODB_URI});
+  server.register(fastifyCors);
 
   await server.ready();
   return server;
