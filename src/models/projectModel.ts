@@ -1,49 +1,147 @@
 import { Schema, model, Model } from 'mongoose';
-import { CommonDocument } from './common'
+import { CobenefitAttrs } from './cobenefitModel';
+import { CommonDocument, Id, lang, Lang } from './common'
+import { CompanyAttrs } from './companyModel';
+import { DossierAttrs } from './dossierModel';
+import { MediaAttrs } from './mediaModel';
+import { MethodAttrs } from './methodModel';
+
+export enum ProjectStatus {
+    TO_FUND = "to_fund",
+    PARTIALLY_FUNDED = "partially_funded",
+    FUNDED = "funded"
+}
+
+export interface CreateProjectDto {
+    name: string;
+    shortDescription: string;
+    longDescription: string;
+    method: Id;
+    location: string;
+    tonnage: number;
+    netbackPrice: string;
+    projectHolder: Id;
+    partner: Id;
+    intermediary: Id;
+    funder: Id;
+    dossier: Id;
+    status: ProjectStatus;
+    cobenefits: Array<Id>;
+    mainMedia: Id;
+    medias: Array<Id>;
+    banner: string;
+}
 
 export interface ProjectAttrs {
-    title: string;
-    description: string;
-    images: Array<string>;
+    name: string;
+    shortDescription: string;
+    longDescription: string;
+    method: MethodAttrs;
     location: string;
-    amountCarbon: number;
+    tonnage: number;
+    netbackPrice: string;
+    projectHolder: CompanyAttrs;
+    partner: CompanyAttrs;
+    intermediary: CompanyAttrs;
+    funder: CompanyAttrs;
+    dossier: DossierAttrs;
+    status: ProjectStatus;
+    cobenefits: Array<CobenefitAttrs>;
+    mainMedia: MediaAttrs;
+    medias: Array<MediaAttrs>;
+    banner: string;
 }
 
 export interface ProjectDocument extends CommonDocument, ProjectAttrs {}
 
 export interface ProjectModel extends Model<ProjectDocument> {
-    addOne(createProjectDto: ProjectAttrs): ProjectDocument;
+    budget(): number;
 }
 
 export const projectSchema: Schema = new Schema(
     {
-        title: {
+        name: {
             type: String,
-            required: true
+            maxlength: 100,
+            required: true,
+            intl: true
         },
-        description: {
+        shortDescription: {
             type: String,
-            required: true
+            maxlength: 300,
+            required: true,
+            intl: true
+        },
+        longDescription: {
+            type: String,
+            required: true,
+            intl: true
+        },
+        method: { 
+            type: Schema.Types.ObjectId, 
+            ref: 'Method',
+            required: true,
         },
         location: {
             type: String,
-            required: true
+            required: true,
         },
-        amountCarbon: {
+        tonnage: {
             type: Number,
-            required: true
         },
-        images: [{
-            type: String
-        }]
+        netbackPrice: {
+            type: Number,
+        },
+        projectHolder: { 
+            type: Schema.Types.ObjectId, 
+            ref: 'Company',
+            required: true,
+        },
+        partner: {
+            type: Schema.Types.ObjectId, 
+            ref: 'Company',
+        },
+        intermediary: {
+            type: Schema.Types.ObjectId, 
+            ref: 'Company',
+        },
+        funder: { 
+            type: Schema.Types.ObjectId, 
+            ref: 'Company',
+        },
+        dossier: { 
+            type: Schema.Types.ObjectId, 
+            ref: 'Dossier',
+            required: true,
+        },
+        status: {
+            type: String,
+            enum: ProjectStatus,
+            required: true,
+        },
+        cobenefits: [{ 
+            type: Schema.Types.ObjectId, 
+            ref: 'Cobenefits',
+        }],
+        mainMedia: { 
+            type: Schema.Types.ObjectId, 
+            ref: 'Media',
+        },
+        medias: [{ 
+            type: Schema.Types.ObjectId, 
+            ref: 'Media',
+        }],
+        banner: { 
+            type: String, 
+        },
     },
     {
         timestamps: true
     }
 );
 
-projectSchema.statics.addOne = (createProjectDto: ProjectAttrs) => {
-    return Project.create(createProjectDto);
-};
+projectSchema.virtual('budget').get(function() {
+    return this.tonnage * this.netbackPrice;
+});
 
 export const Project = model<ProjectDocument, ProjectModel>('Project', projectSchema);

@@ -1,13 +1,28 @@
 import { FastifyInstance } from 'fastify';
 import { FastifyPluginAsync, FastifyPluginOptions } from 'fastify';
 import fp from 'fastify-plugin';
-import { Project, ProjectModel } from './models/projectModel';
 import mongoose from 'mongoose';
-import { Blog, BlogModel } from './models/blogModel';
+//import mongooseIntl from 'mongoose-intl';
+import { 
+    Project, ProjectModel, 
+    Company, CompanyModel, 
+    Contact, ContactModel, 
+    Cobenefit, CobenefitModel, 
+    Media, MediaModel, 
+    Method, MethodModel, 
+    Sector, SectorModel, 
+    Dossier, DossierModel 
+} from './models/';
 
 export interface Models {
-    Blog: BlogModel;
     Project: ProjectModel;
+    Company: CompanyModel;
+    Contact: ContactModel;
+    Cobenefit: CobenefitModel;
+    Media: MediaModel;
+    Method: MethodModel;
+    Sector: SectorModel;
+    Dossier: DossierModel;
 }
 export interface Db {
     models: Models;
@@ -22,6 +37,8 @@ const ConnectDB: FastifyPluginAsync<MyPluginOptions> = async (
     options: FastifyPluginOptions
 ) => {
     try {
+        //mongoose.plugin(mongooseIntl, { languages: ['en', 'fr'], defaultLanguage: 'fr' });
+        //projectSchema.plugin(mongooseIntl, { languages: ['en', 'fr'], defaultLanguage: 'fr' });
         mongoose.connection.on('connected', () => {
             fastify.log.info({ actor: 'MongoDB' }, 'connected');
         });
@@ -29,7 +46,7 @@ const ConnectDB: FastifyPluginAsync<MyPluginOptions> = async (
             fastify.log.error({ actor: 'MongoDB' }, 'disconnected');
         });
         await mongoose.connect(options.uri);
-        const models: Models = { Blog, Project };
+        const models: Models = { Project, Company, Contact, Cobenefit, Media, Method, Sector, Dossier };
         fastify.decorate('db', { models });
     } catch (error) {
         console.error(error);

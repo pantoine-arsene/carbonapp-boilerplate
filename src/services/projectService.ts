@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { ProjectAttrs, ProjectDocument } from "../models/projectModel";
+import { CreateProjectDto, ProjectDocument } from "../models/projectModel";
 import { ProjectManager } from "../managers/projectManager";
 
 export class ProjectService {
@@ -14,11 +14,19 @@ export class ProjectService {
         return (this.projectManager.getAll());
     }
 
-    public create = async (createProjectDto: ProjectAttrs): Promise<ProjectDocument> => {
+    public create = async (createProjectDto: CreateProjectDto): Promise<ProjectDocument> => {
         return (this.projectManager.create(createProjectDto));
     }
 
     public getById = async (id: string): Promise<ProjectDocument | null> => {
         return (this.projectManager.getById(id));
+    }
+
+    public update = async (id: string, createProjectDto: CreateProjectDto): Promise<ProjectDocument | null> => {
+        return (this.projectManager.update(id, createProjectDto));
+    }
+
+    public delete = async (id: string): Promise<ProjectDocument | null> => {
+        return (this.projectManager.delete(id));
     }
 }

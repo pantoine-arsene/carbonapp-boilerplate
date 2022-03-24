@@ -4,8 +4,14 @@ import {
 } from 'fastify';
 import fp from 'fastify-plugin';
 import { Db } from '../db';
-import { BlogRoutes } from './blogRoutes';
+import { CobenefitRoutes } from './cobenefitRoutes';
+import { CompanyRoutes } from './companyRoutes';
+import { ContactRoutes } from './contactRoutes';
+import { DossierRoutes } from './dossierRoutes';
+import { MediaRoutes } from './mediaRoutes';
+import { MethodRoutes } from './methodRoutes';
 import { ProjectRoutes } from './projectRoutes';
+import { SectorRoutes } from './sectorRoutes';
 
 // Declaration merging
 declare module 'fastify' {
@@ -24,7 +30,13 @@ const Route: FastifyPluginAsync = async (server: FastifyInstance) => {
           return reply.send(500);
       }
     });
-    BlogRoutes(server);
     ProjectRoutes(server);
+    CobenefitRoutes(server);
+    CompanyRoutes(server);
+    ContactRoutes(server);
+    DossierRoutes(server);
+    MediaRoutes(server);
+    MethodRoutes(server);
+    SectorRoutes(server);
 };
 export default fp(Route);

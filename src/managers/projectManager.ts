@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { ProjectAttrs, ProjectDocument } from "../models/projectModel";
+import { CreateProjectDto, ProjectDocument } from "../models/projectModel";
 
 export class ProjectManager {
 
@@ -11,16 +11,46 @@ export class ProjectManager {
 
     public getAll = async (): Promise<Array<ProjectDocument>> => {
         const { Project } = this.server.db.models;
-        return (Project.find({}));
+        return (Project.find({})
+            .populate('method')
+            .populate('projectHolder')
+            .populate('partner')
+            .populate('intermediary')
+            .populate('funder')
+            .populate('dossier')
+            .populate('cobenefits')
+            .populate('mainMedia')
+            .populate('medias')
+        );
     }
 
-    public create = async (createProjectDto: ProjectAttrs): Promise<ProjectDocument> => {
+    public create = async (createProjectDto: CreateProjectDto): Promise<ProjectDocument> => {
         const { Project } = this.server.db.models;
-        return Project.addOne(createProjectDto);
+        return Project.create(createProjectDto);
     }
 
     public getById = async (id: string): Promise<ProjectDocument | null> => {
         const { Project } = this.server.db.models;
-        return (Project.findById(id));
+        return (Project.findById(id)
+            .populate('method')
+            .populate('projectHolder')
+            .populate('partner')
+            .populate('intermediary')
+            .populate('funder')
+            .populate('dossier')
+            .populate('cobenefits')
+            .populate('mainMedia')
+            .populate('medias')
+        );
+    }
+
+    public update = async (id: string, createProjectDto: CreateProjectDto): Promise<ProjectDocument | null> => {
+        const { Project } = this.server.db.models;
+        return Project.findByIdAndUpdate(id, createProjectDto);
+    }
+
+    public delete = async (id: string): Promise<ProjectDocument | null> => {
+        const { Project } = this.server.db.models;
+        return Project.findByIdAndDelete(id);
     }
 }

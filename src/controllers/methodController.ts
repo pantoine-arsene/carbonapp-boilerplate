@@ -1,17 +1,17 @@
 import { FastifyInstance } from "fastify";
-import { ProjectService } from "../services/projectService";
+import { MethodService } from "../services/methodService";
 
-export class ProjectController {
+export class MethodController {
 
-    private projectService: ProjectService;
+    private methodService: MethodService;
 
     constructor(server: FastifyInstance) {
-        this.projectService = new ProjectService(server);
+        this.methodService = new MethodService(server);
     }
 
     public getAll = async (request, reply) => {
         try {
-            return reply.code(200).send(await this.projectService.getAll());
+            return reply.code(200).send(await this.methodService.getAll());
         } catch (error) {
             request.log.error(error);
             return reply.code(500).send(error);
@@ -20,7 +20,7 @@ export class ProjectController {
 
     public create = async (request, reply) => {
         try {
-            return reply.code(201).send(await this.projectService.create(request.body));
+            return reply.code(201).send(await this.methodService.create(request.body));
         } catch (error) {
             request.log.error(error);
             return reply.code(500).send(error);
@@ -29,11 +29,11 @@ export class ProjectController {
 
     public getById = async (request, reply) => {
         try {
-            const project = await this.projectService.getById(request.params.id);
-            if (!project) {
-                return reply.code(404).send("Project not found");
+            const method = await this.methodService.getById(request.params.id);
+            if (!method) {
+                return reply.code(404).send("Method not found");
             }
-            return reply.code(200).send(project);
+            return reply.code(200).send(method);
         } catch (error) {
             request.log.error(error);
             return reply.code(500).send(error);
@@ -42,11 +42,11 @@ export class ProjectController {
 
     public update = async (request, reply) => {
         try {
-            const project = await this.projectService.update(request.params.id, request.body);
-            if (!project) {
-                return reply.code(404).send("Project not found");
+            const method = await this.methodService.update(request.params.id, request.body);
+            if (!method) {
+                return reply.code(404).send("Method not found");
             }
-            return reply.code(200).send(project);
+            return reply.code(200).send(method);
         } catch (error) {
             request.log.error(error);
             return reply.code(500).send(error);
@@ -55,11 +55,11 @@ export class ProjectController {
 
     public delete = async (request, reply) => {
         try {
-            const project = await this.projectService.delete(request.params.id);
-            if (!project) {
-                return reply.code(404).send("Project not found");
+            const method = await this.methodService.delete(request.params.id);
+            if (!method) {
+                return reply.code(404).send("Method not found");
             }
-            return reply.code(200).send(project);
+            return reply.code(200).send(method);
         } catch (error) {
             request.log.error(error);
             return reply.error(500).send(error);
