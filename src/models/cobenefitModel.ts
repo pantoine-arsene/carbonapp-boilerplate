@@ -15,7 +15,7 @@ export interface CobenefitAttrs {
 
 export interface CobenefitDocument extends CommonDocument, CobenefitAttrs {}
 
-export interface CobenefitModel extends Model<CobenefitDocument> {}
+export type CobenefitModel = Model<CobenefitDocument>
 
 export const cobenefitSchema: Schema = new Schema(
     {

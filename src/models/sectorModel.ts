@@ -15,7 +15,7 @@ export interface SectorAttrs {
 
 export interface SectorDocument extends CommonDocument, SectorAttrs {}
 
-export interface SectorModel extends Model<SectorDocument> {}
+export type SectorModel = Model<SectorDocument>
 
 export const sectorSchema: Schema = new Schema(
     {

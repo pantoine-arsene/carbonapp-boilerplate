@@ -22,7 +22,7 @@ export interface CompanyAttrs {
 
 export interface CompanyDocument extends CommonDocument, CompanyAttrs {}
 
-export interface CompanyModel extends Model<CompanyDocument> {}
+export type CompanyModel = Model<CompanyDocument>
 
 export const companySchema: Schema = new Schema(
     {

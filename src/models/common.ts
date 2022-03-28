@@ -7,7 +7,7 @@ export interface CommonDocument extends Document {
 
 export type Id = string;
 
-export var Lang = {
+export const Lang = {
     type: {
         en: String,
         fr: String,

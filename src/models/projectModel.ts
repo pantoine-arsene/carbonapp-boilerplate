@@ -1,6 +1,6 @@
 import { Schema, model, Model } from 'mongoose';
 import { CobenefitAttrs } from './cobenefitModel';
-import { CommonDocument, Id, lang, Lang } from './common'
+import { CommonDocument, Id } from './common'
 import { CompanyAttrs } from './companyModel';
 import { DossierAttrs } from './dossierModel';
 import { MediaAttrs } from './mediaModel';
@@ -19,7 +19,7 @@ export interface CreateProjectDto {
     method: Id;
     location: string;
     tonnage: number;
-    netbackPrice: string;
+    netbackPrice: number;
     projectHolder: Id;
     partner: Id;
     intermediary: Id;
@@ -39,7 +39,7 @@ export interface ProjectAttrs {
     method: MethodAttrs;
     location: string;
     tonnage: number;
-    netbackPrice: string;
+    netbackPrice: number;
     projectHolder: CompanyAttrs;
     partner: CompanyAttrs;
     intermediary: CompanyAttrs;
@@ -121,7 +121,7 @@ export const projectSchema: Schema = new Schema(
         },
         cobenefits: [{ 
             type: Schema.Types.ObjectId, 
-            ref: 'Cobenefits',
+            ref: 'Cobenefit',
         }],
         mainMedia: { 
             type: Schema.Types.ObjectId, 

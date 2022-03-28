@@ -1,10 +1,9 @@
 import { Schema, model, Model } from 'mongoose';
-import { CommonDocument, lang, Lang } from './common'
-import { SectorAttrs as Sector } from './sectorModel';
+import { CommonDocument } from './common';
 
 export enum DossierType {
     INDIVIDUAL = "individual",
-    COLLECTIVE = "collectif"
+    COLLECTIVE = "collective"
 }
 
 export enum DossierStatus {
@@ -31,7 +30,7 @@ export interface DossierAttrs {
 
 export interface DossierDocument extends CommonDocument, DossierAttrs {}
 
-export interface DossierModel extends Model<DossierDocument> {}
+export type DossierModel = Model<DossierDocument>
 
 export const dossierSchema: Schema = new Schema(
     {

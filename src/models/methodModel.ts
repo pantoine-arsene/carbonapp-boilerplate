@@ -1,5 +1,5 @@
 import { Schema, model, Model } from 'mongoose';
-import { CommonDocument, Id, lang, Lang } from './common'
+import { CommonDocument, Id } from './common'
 import { SectorAttrs as Sector } from './sectorModel';
 
 export interface CreateMethodDto {
@@ -20,7 +20,7 @@ export interface MethodAttrs {
 
 export interface MethodDocument extends CommonDocument, MethodAttrs {}
 
-export interface MethodModel extends Model<MethodDocument> {}
+export type MethodModel = Model<MethodDocument>
 
 export const methodSchema: Schema = new Schema(
     {

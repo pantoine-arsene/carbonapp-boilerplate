@@ -18,7 +18,7 @@ export interface MediaAttrs {
 
 export interface MediaDocument extends CommonDocument, MediaAttrs {}
 
-export interface MediaModel extends Model<MediaDocument> {}
+export type MediaModel = Model<MediaDocument>
 
 export const mediaSchema: Schema = new Schema(
     {

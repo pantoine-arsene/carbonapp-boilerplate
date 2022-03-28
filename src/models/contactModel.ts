@@ -17,7 +17,7 @@ export interface ContactAttrs {
 
 export interface ContactDocument extends CommonDocument, ContactAttrs {}
 
-export interface ContactModel extends Model<ContactDocument> {}
+export type ContactModel = Model<ContactDocument>
 
 export const contactSchema: Schema = new Schema(
     {
