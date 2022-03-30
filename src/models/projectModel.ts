@@ -17,7 +17,10 @@ export interface CreateProjectDto {
     shortDescription: string;
     longDescription: string;
     method: Id;
-    location: string;
+    country: string;
+    zip: string;
+    city: string;
+    address: string;
     tonnage: number;
     netbackPrice: number;
     projectHolder: Id;
@@ -37,7 +40,10 @@ export interface ProjectAttrs {
     shortDescription: string;
     longDescription: string;
     method: MethodAttrs;
-    location: string;
+    country: string;
+    zip: string;
+    city: string;
+    address: string;
     tonnage: number;
     netbackPrice: number;
     projectHolder: CompanyAttrs;
@@ -82,9 +88,17 @@ export const projectSchema: Schema = new Schema(
             ref: 'Method',
             required: true,
         },
-        location: {
+        country: {
             type: String,
-            required: true,
+        },
+        zip: {
+            type: String,
+        },
+        city: {
+            type: String,
+        },
+        address: {
+            type: String,
         },
         tonnage: {
             type: Number,

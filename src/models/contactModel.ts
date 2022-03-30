@@ -5,7 +5,7 @@ export interface CreateContactDto {
     firstname: string;
     lastname: string;
     email: string;
-    phone: string;    
+    phone: string;
 }
 
 export interface ContactAttrs {
