@@ -34,9 +34,9 @@
   },
   "homepage": "https://github.com/yonathan06/fastify-typescript-starter#readme",
   "devDependencies": {
-    "@types/mongoose": "^5.11.97",
     "@types/node": "^16.11.26",
     "@types/tap": "^15.0.5",
+    "@types/validator": "^13.7.2",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
     "esbuild": "^0.14.11",
@@ -53,11 +53,17 @@
   "dependencies": {
     "@sinclair/typebox": "^0.23.2",
     "aws-sdk": "^2.1090.0",
+    "chalk": "^5.0.1",
     "env-schema": "^3.5.1",
     "fastify": "^3.27.4",
     "fastify-cors": "^6.0.3",
     "fastify-plugin": "^3.0.1",
-    "mongoose": "^6.2.4",
-    "mongoose-intl": "^3.3.0"
+    "fastify-postgres": "^3.6.0",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.17.0",
+    "sequelize-fastify": "^1.0.9",
+    "sequelize-typescript": "^2.1.3"
   }
 }

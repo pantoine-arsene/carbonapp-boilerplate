@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { CreateDossierDto, DossierDocument } from "../models/dossierModel";
+import { CreateDossierDto, Dossier } from "../models/dossierModel";
 
 export class DossierManager {
 
@@ -9,28 +9,18 @@ export class DossierManager {
         this.server = server;
     }
 
-    public getAll = async (): Promise<Array<DossierDocument>> => {
-        const { Dossier } = this.server.db.models;
-        return (Dossier.find({}));
+    public getAll = async (): Promise<Array<Dossier>> => {
     }
 
-    public create = async (createDossierDto: CreateDossierDto): Promise<DossierDocument> => {
-        const { Dossier } = this.server.db.models;
-        return Dossier.create(createDossierDto);
+    public create = async (createDossierDto: CreateDossierDto): Promise<Dossier> => {
     }
 
-    public getById = async (id: string): Promise<DossierDocument | null> => {
-        const { Dossier } = this.server.db.models;
-        return (Dossier.findById(id));
+    public getById = async (id: string): Promise<Dossier | null> => {
     }
 
-    public update = async (id: string, createDossierDto: CreateDossierDto): Promise<DossierDocument | null> => {
-        const { Dossier } = this.server.db.models;
-        return Dossier.findOneAndUpdate({id}, createDossierDto);
+    public update = async (id: string, createDossierDto: CreateDossierDto): Promise<Dossier | null> => {
     }
 
-    public delete = async (id: string): Promise<DossierDocument | null> => {
-        const { Dossier } = this.server.db.models;
-        return Dossier.findByIdAndDelete(id);
+    public delete = async (id: string): Promise<Dossier | null> => {
     }
 }

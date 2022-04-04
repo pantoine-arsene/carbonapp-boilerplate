@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { CreateMethodDto, MethodDocument } from "../models/methodModel";
+import { CreateMethodDto, Method } from "../models/methodModel";
 
 export class MethodManager {
 
@@ -9,28 +9,18 @@ export class MethodManager {
         this.server = server;
     }
 
-    public getAll = async (): Promise<Array<MethodDocument>> => {
-        const { Method } = this.server.db.models;
-        return (Method.find({}).populate('sector'));
+    public getAll = async (): Promise<Array<Method>> => {
     }
 
-    public create = async (createMethodDto: CreateMethodDto): Promise<MethodDocument> => {
-        const { Method } = this.server.db.models;
-        return Method.create(createMethodDto);
+    public create = async (createMethodDto: CreateMethodDto): Promise<Method> => {
     }
 
-    public getById = async (id: string): Promise<MethodDocument | null> => {
-        const { Method } = this.server.db.models;
-        return (Method.findById(id).populate('sector'));
+    public getById = async (id: string): Promise<Method | null> => {
     }
 
-    public update = async (id: string, createMethodDto: CreateMethodDto): Promise<MethodDocument | null> => {
-        const { Method } = this.server.db.models;
-        return Method.findOneAndUpdate({id}, createMethodDto);
+    public update = async (id: string, createMethodDto: CreateMethodDto): Promise<Method | null> => {
     }
 
-    public delete = async (id: string): Promise<MethodDocument | null> => {
-        const { Method } = this.server.db.models;
-        return Method.findByIdAndDelete(id);
+    public delete = async (id: string): Promise<Method | null> => {
     }
 }

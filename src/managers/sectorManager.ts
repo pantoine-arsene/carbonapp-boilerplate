@@ -9,28 +9,18 @@ export class SectorManager {
         this.server = server;
     }
 
-    public getAll = async (): Promise<Array<SectorDocument>> => {
-        const { Sector } = this.server.db.models;
-        return (Sector.find({}));
+    public getAll = async (): Promise<Array<Sector>> => {
     }
 
-    public create = async (createSectorDto: CreateSectorDto): Promise<SectorDocument> => {
-        const { Sector } = this.server.db.models;
-        return Sector.create(createSectorDto);
+    public create = async (createSectorDto: CreateSectorDto): Promise<Sector> => {
     }
 
-    public getById = async (id: string): Promise<SectorDocument | null> => {
-        const { Sector } = this.server.db.models;
-        return (Sector.findById(id));
+    public getById = async (id: string): Promise<Sector | null> => {
     }
 
-    public update = async (id: string, createSectorDto: CreateSectorDto): Promise<SectorDocument | null> => {
-        const { Sector } = this.server.db.models;
-        return Sector.findOneAndUpdate({id}, createSectorDto);
+    public update = async (id: string, createSectorDto: CreateSectorDto): Promise<Sector | null> => {
     }
 
-    public delete = async (id: string): Promise<SectorDocument | null> => {
-        const { Sector } = this.server.db.models;
-        return Sector.findByIdAndDelete(id);
+    public delete = async (id: string): Promise<Sector | null> => {
     }
 }

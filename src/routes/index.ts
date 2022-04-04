@@ -3,7 +3,6 @@ import {
   FastifyPluginAsync 
 } from 'fastify';
 import fp from 'fastify-plugin';
-import { Db } from '../db';
 import { CobenefitRoutes } from './cobenefitRoutes';
 import { CompanyRoutes } from './companyRoutes';
 import { ContactRoutes } from './contactRoutes';
@@ -13,12 +12,6 @@ import { MethodRoutes } from './methodRoutes';
 import { ProjectRoutes } from './projectRoutes';
 import { SectorRoutes } from './sectorRoutes';
 
-// Declaration merging
-declare module 'fastify' {
-    export interface FastifyInstance {
-        db: Db;
-    }
-}
 
 const Route: FastifyPluginAsync = async (server: FastifyInstance) => {
 

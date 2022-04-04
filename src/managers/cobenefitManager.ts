@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { CreateCobenefitDto, CobenefitDocument } from "../models/cobenefitModel";
+import { CreateCobenefitDto, Cobenefit } from "../models/cobenefitModel";
 
 export class CobenefitManager {
 
@@ -9,29 +9,19 @@ export class CobenefitManager {
         this.server = server;
     }
 
-    public getAll = async (): Promise<Array<CobenefitDocument>> => {
-        const { Cobenefit } = this.server.db.models;
-        return (Cobenefit.find({}));
+    public getAll = async (): Promise<Array<Cobenefit>> => {
     }
 
-    public create = async (createCobenefitDto: CreateCobenefitDto): Promise<CobenefitDocument> => {
-        const { Cobenefit } = this.server.db.models;
-        return Cobenefit.create(createCobenefitDto);
+    public create = async (createCobenefitDto: CreateCobenefitDto): Promise<Cobenefit> => {
     }
 
-    public getById = async (id: string): Promise<CobenefitDocument | null> => {
-        const { Cobenefit } = this.server.db.models;
-        return (Cobenefit.findById(id));
+    public getById = async (id: string): Promise<Cobenefit | null> => {
     }
 
-    public update = async (id: string, createCobenefitDto: CreateCobenefitDto): Promise<CobenefitDocument | null> => {
-        const { Cobenefit } = this.server.db.models;
-        return Cobenefit.findOneAndUpdate({id}, createCobenefitDto);
+    public update = async (id: string, createCobenefitDto: CreateCobenefitDto): Promise<Cobenefit | null> => {
     }
 
-    public delete = async (id: string): Promise<CobenefitDocument | null> => {
-        const { Cobenefit } = this.server.db.models;
-        return Cobenefit.findByIdAndDelete(id);
+    public delete = async (id: string): Promise<Cobenefit | null> => {
     }
 
 }

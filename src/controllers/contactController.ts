@@ -1,12 +1,11 @@
-import { FastifyInstance } from "fastify";
 import { ContactService } from "../services/contactService";
 
 export class ContactController {
 
     private contactService: ContactService;
 
-    constructor(server: FastifyInstance) {
-        this.contactService = new ContactService(server);
+    constructor() {
+        this.contactService = new ContactService();
     }
 
     public getAll = async (request, reply) => {

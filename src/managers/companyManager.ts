@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { CreateCompanyDto, CompanyDocument } from "../models/companyModel";
+import { CreateCompanyDto, Company } from "../models/companyModel";
 
 export class CompanyManager {
 
@@ -9,29 +9,19 @@ export class CompanyManager {
         this.server = server;
     }
 
-    public getAll = async (): Promise<Array<CompanyDocument>> => {
-        const { Company } = this.server.db.models;
-        return (Company.find({}).populate('contact'));
+    public getAll = async (): Promise<Array<Company>> => {
     }
 
-    public create = async (createCompanyDto: CreateCompanyDto): Promise<CompanyDocument> => {
-        const { Company } = this.server.db.models;
-        return Company.create(createCompanyDto);
+    public create = async (createCompanyDto: CreateCompanyDto): Promise<Company> => {
     }
 
-    public getById = async (id: string): Promise<CompanyDocument | null> => {
-        const { Company } = this.server.db.models;
-        return (Company.findById(id).populate('contact'));
+    public getById = async (id: string): Promise<Company | null> => {
     }
 
-    public update = async (id: string, createCompanyDto: CreateCompanyDto): Promise<CompanyDocument | null> => {
-        const { Company } = this.server.db.models;
-        return Company.findOneAndUpdate({id}, createCompanyDto);
+    public update = async (id: string, createCompanyDto: CreateCompanyDto): Promise<Company | null> => {
     }
 
-    public delete = async (id: string): Promise<CompanyDocument | null> => {
-        const { Company } = this.server.db.models;
-        return Company.findByIdAndDelete(id);
+    public delete = async (id: string): Promise<Company | null> => {
     }
 
 }

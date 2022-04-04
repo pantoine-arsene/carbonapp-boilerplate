@@ -9,48 +9,18 @@ export class ProjectManager {
         this.server = server;
     }
 
-    public getAll = async (): Promise<Array<ProjectDocument>> => {
-        const { Project } = this.server.db.models;
-        return (Project.find({})
-            .populate('method')
-            .populate('projectHolder')
-            .populate('partner')
-            .populate('intermediary')
-            .populate('funder')
-            .populate('dossier')
-            .populate('cobenefits')
-            .populate('mainMedia')
-            .populate('medias')
-        );
+    public getAll = async (): Promise<Array<Project>> => {
     }
 
-    public create = async (createProjectDto: CreateProjectDto): Promise<ProjectDocument> => {
-        const { Project } = this.server.db.models;
-        return Project.create(createProjectDto);
+    public create = async (createProjectDto: CreateProjectDto): Promise<Project> => {
     }
 
-    public getById = async (id: string): Promise<ProjectDocument | null> => {
-        const { Project } = this.server.db.models;
-        return (Project.findById(id)
-            .populate('method')
-            .populate('projectHolder')
-            .populate('partner')
-            .populate('intermediary')
-            .populate('funder')
-            .populate('dossier')
-            .populate('cobenefits')
-            .populate('mainMedia')
-            .populate('medias')
-        );
+    public getById = async (id: string): Promise<Project | null> => {
     }
 
-    public update = async (id: string, createProjectDto: CreateProjectDto): Promise<ProjectDocument | null> => {
-        const { Project } = this.server.db.models;
-        return Project.findByIdAndUpdate(id, createProjectDto);
+    public update = async (id: string, createProjectDto: CreateProjectDto): Promise<Project | null> => {
     }
 
-    public delete = async (id: string): Promise<ProjectDocument | null> => {
-        const { Project } = this.server.db.models;
-        return Project.findByIdAndDelete(id);
+    public delete = async (id: string): Promise<Project | null> => {
     }
 }

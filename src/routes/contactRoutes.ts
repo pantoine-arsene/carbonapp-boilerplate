@@ -1,10 +1,10 @@
 import { ContactController } from "../controllers/contactController";
 import { FastifyInstance } from "fastify";
-import { CreateContactDto } from '../models/contactModel';
+import { CreateContactDto } from '../db/models/ContactModel';
 
 export const ContactRoutes = async (server: FastifyInstance) => {
 
-    const contactController = new ContactController(server);
+    const contactController = new ContactController();
 
     server.get('/contacts', {}, async (request, reply) => contactController.getAll(request, reply));
     server.post<{ Body: CreateContactDto }>('/contacts', {}, async (request, reply) => contactController.create(request, reply));

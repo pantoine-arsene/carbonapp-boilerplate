@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { CreateMediaDto, MediaDocument } from "../models/mediaModel";
+import { CreateMediaDto, Media } from "../models/mediaModel";
 
 export class MediaManager {
 
@@ -9,28 +9,18 @@ export class MediaManager {
         this.server = server;
     }
 
-    public getAll = async (): Promise<Array<MediaDocument>> => {
-        const { Media } = this.server.db.models;
-        return (Media.find({}));
+    public getAll = async (): Promise<Array<Media>> => {
     }
 
-    public create = async (createMediaDto: CreateMediaDto): Promise<MediaDocument> => {
-        const { Media } = this.server.db.models;
-        return Media.create(createMediaDto);
+    public create = async (createMediaDto: CreateMediaDto): Promise<Media> => {
     }
 
-    public getById = async (id: string): Promise<MediaDocument | null> => {
-        const { Media } = this.server.db.models;
-        return (Media.findById(id));
+    public getById = async (id: string): Promise<Media | null> => {
     }
 
-    public update = async (id: string, createMediaDto: CreateMediaDto): Promise<MediaDocument | null> => {
-        const { Media } = this.server.db.models;
-        return Media.findOneAndUpdate({id}, createMediaDto);
+    public update = async (id: string, createMediaDto: CreateMediaDto): Promise<Media | null> => {
     }
 
-    public delete = async (id: string): Promise<MediaDocument | null> => {
-        const { Media } = this.server.db.models;
-        return Media.findByIdAndDelete(id);
+    public delete = async (id: string): Promise<Media | null> => {
     }
 }

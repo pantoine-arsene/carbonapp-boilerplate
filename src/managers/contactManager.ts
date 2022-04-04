@@ -1,37 +1,27 @@
-import { FastifyInstance } from "fastify";
-import { CreateContactDto, ContactDocument } from "../models/contactModel";
+import { CreateContactDto } from '../db/models/ContactModel';
+import Contact from '../db/models/ContactModel';
 
 export class ContactManager {
 
-    private server: FastifyInstance;
-
-    constructor(server: FastifyInstance) {
-        this.server = server;
+    public getAll = async (): Promise<Array<Contact>> => {
+        return (Contact.findAll());
     }
 
-    public getAll = async (): Promise<Array<ContactDocument>> => {
-        const { Contact } = this.server.db.models;
-        return (Contact.find({}));
+    public create = async (createContactDto: CreateContactDto): Promise<Contact> => {
+        return (Contact.create(createContactDto));
     }
 
-    public create = async (createContactDto: CreateContactDto): Promise<ContactDocument> => {
-        const { Contact } = this.server.db.models;
-        return Contact.create(createContactDto);
+    public getById = async (id: number): Promise<Contact | null> => {
+        return (Contact.findByPk(id));
     }
 
-    public getById = async (id: string): Promise<ContactDocument | null> => {
-        const { Contact } = this.server.db.models;
-        return (Contact.findById(id));
+    public update = async (id: string, createContactDto: CreateContactDto): Promise<Contact | null> => {
+        const contact = await Contact.findByPk(id);
+        return contact.update(createContactDto);
     }
 
-    public update = async (id: string, createContactDto: CreateContactDto): Promise<ContactDocument | null> => {
-        const { Contact } = this.server.db.models;
-        return Contact.findOneAndUpdate({id}, createContactDto);
-    }
-
-    public delete = async (id: string): Promise<ContactDocument | null> => {
-        const { Contact } = this.server.db.models;
-        return Contact.findByIdAndDelete(id);
+    public delete = async (id: string): Promise<number> => {
+        return Contact.destroy({where: {id}});
     }
 
 }
