@@ -1,27 +1,26 @@
-import { FastifyInstance } from "fastify";
-import { CreateCompanyDto, Company } from "../models/companyModel";
+import Company, { CreateCompanyDto } from '../db/models/CompanyModel';
 
 export class CompanyManager {
 
-    private server: FastifyInstance;
-
-    constructor(server: FastifyInstance) {
-        this.server = server;
-    }
-
     public getAll = async (): Promise<Array<Company>> => {
+        return (Company.findAll());
     }
 
     public create = async (createCompanyDto: CreateCompanyDto): Promise<Company> => {
+        return (Company.create(createCompanyDto));
     }
 
-    public getById = async (id: string): Promise<Company | null> => {
+    public getById = async (id: number): Promise<Company | null> => {
+        return (Company.findByPk(id));
     }
 
     public update = async (id: string, createCompanyDto: CreateCompanyDto): Promise<Company | null> => {
+        const contact = await Company.findByPk(id);
+        return contact.update(createCompanyDto);
     }
 
-    public delete = async (id: string): Promise<Company | null> => {
+    public delete = async (id: string): Promise<number> => {
+        return Company.destroy({where: {id}});
     }
 
 }

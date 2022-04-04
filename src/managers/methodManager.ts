@@ -1,26 +1,25 @@
-import { FastifyInstance } from "fastify";
-import { CreateMethodDto, Method } from "../models/methodModel";
+import Method, { CreateMethodDto } from '../db/models/MethodModel';
 
 export class MethodManager {
 
-    private server: FastifyInstance;
-
-    constructor(server: FastifyInstance) {
-        this.server = server;
-    }
-
     public getAll = async (): Promise<Array<Method>> => {
+        return (Method.findAll());
     }
 
     public create = async (createMethodDto: CreateMethodDto): Promise<Method> => {
+        return (Method.create(createMethodDto));
     }
 
-    public getById = async (id: string): Promise<Method | null> => {
+    public getById = async (id: number): Promise<Method | null> => {
+        return (Method.findByPk(id));
     }
 
     public update = async (id: string, createMethodDto: CreateMethodDto): Promise<Method | null> => {
+        const contact = await Method.findByPk(id);
+        return contact.update(createMethodDto);
     }
 
-    public delete = async (id: string): Promise<Method | null> => {
+    public delete = async (id: string): Promise<number> => {
+        return Method.destroy({where: {id}});
     }
 }

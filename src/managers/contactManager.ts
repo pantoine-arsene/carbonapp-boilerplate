@@ -1,5 +1,4 @@
-import { CreateContactDto } from '../db/models/ContactModel';
-import Contact from '../db/models/ContactModel';
+import Contact, { CreateContactDto } from '../db/models/ContactModel';
 
 export class ContactManager {
 

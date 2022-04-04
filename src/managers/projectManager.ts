@@ -1,26 +1,25 @@
-import { FastifyInstance } from "fastify";
-import { CreateProjectDto, ProjectDocument } from "../models/projectModel";
+import Contact, { CreateContactDto } from '../db/models/ContactModel';
 
 export class ProjectManager {
 
-    private server: FastifyInstance;
-
-    constructor(server: FastifyInstance) {
-        this.server = server;
+    public getAll = async (): Promise<Array<Contact>> => {
+        return (Contact.findAll());
     }
 
-    public getAll = async (): Promise<Array<Project>> => {
+    public create = async (createContactDto: CreateContactDto): Promise<Contact> => {
+        return (Contact.create(createContactDto));
     }
 
-    public create = async (createProjectDto: CreateProjectDto): Promise<Project> => {
+    public getById = async (id: number): Promise<Contact | null> => {
+        return (Contact.findByPk(id));
     }
 
-    public getById = async (id: string): Promise<Project | null> => {
+    public update = async (id: string, createContactDto: CreateContactDto): Promise<Contact | null> => {
+        const contact = await Contact.findByPk(id);
+        return contact.update(createContactDto);
     }
 
-    public update = async (id: string, createProjectDto: CreateProjectDto): Promise<Project | null> => {
-    }
-
-    public delete = async (id: string): Promise<Project | null> => {
+    public delete = async (id: string): Promise<number> => {
+        return Contact.destroy({where: {id}});
     }
 }
