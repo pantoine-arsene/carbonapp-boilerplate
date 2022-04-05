@@ -1,4 +1,5 @@
 import * as S from "sequelize-typescript"
+import Company from './CompanyModel';
 
 export enum DossierType {
     INDIVIDUAL = "individual",
@@ -47,4 +48,9 @@ export default class Dossier extends S.Model<Dossier> {
     @S.Column(S.DataType.STRING)
     status: DossierStatus;
 
+    @S.BelongsTo(() => Company)
+    representative: Company;
+
+    @S.ForeignKey(() => Company)
+    representativeId: number;
 }

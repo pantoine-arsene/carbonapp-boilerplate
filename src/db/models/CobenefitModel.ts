@@ -1,4 +1,6 @@
 import * as S from "sequelize-typescript"
+import ProjectCobenefit from './ProjectCobenefitsModel';
+import Project from './ProjectModel';
 
 export interface CreateCobenefitDto {
     image: string;
@@ -28,4 +30,8 @@ export default class Cobenefit extends S.Model<Cobenefit> {
 
     @S.Column(S.DataType.STRING)
     image: string;
+
+    @S.BelongsToMany(() => Project, () => ProjectCobenefit)
+    projects: Project[];
+
 }

@@ -1,5 +1,6 @@
 import * as S from "sequelize-typescript"
 import Method from './MethodModel';
+import Request from './RequestModel';
 
 export interface CreateSectorDto {
     image: string;
@@ -32,5 +33,8 @@ export default class Sector extends S.Model<Sector> {
     description: string;
 
     @S.HasMany(() => Method)
-    methods: Method[]
+    methods: Method[];
+
+    @S.HasMany(() => Request)
+    requests: Request[];
 }

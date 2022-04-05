@@ -1,4 +1,5 @@
 import * as S from "sequelize-typescript"
+import Company from './CompanyModel';
 
 export interface CreateContactDto {
     firstname: string;
@@ -30,4 +31,7 @@ export default class Contact extends S.Model<Contact> {
 
     @S.Column(S.DataType.STRING)
     phone: string;
+
+    @S.HasOne(() => Company)
+    company: Company;
 }

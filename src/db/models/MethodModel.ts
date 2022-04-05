@@ -23,7 +23,7 @@ export default class Method extends S.Model<Method> {
     @S.AllowNull(false)
     @S.Column(S.DataType.STRING)
     name: string;
-
+ 
     @S.Column(S.DataType.STRING)
     image: string;
 
