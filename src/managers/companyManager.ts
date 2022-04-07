@@ -1,9 +1,10 @@
+import Contact from '../db/models/ContactModel';
 import Company, { CreateCompanyDto } from '../db/models/CompanyModel';
 
 export class CompanyManager {
 
     public getAll = async (): Promise<Array<Company>> => {
-        return (Company.findAll());
+        return (Company.findAll({include: {model: Contact, required: true}}));
     }
 
     public create = async (createCompanyDto: CreateCompanyDto): Promise<Company> => {

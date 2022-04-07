@@ -26,6 +26,8 @@ export default class Request extends S.Model<Request> {
     @S.Column(S.DataType.INTEGER)
     carbonAmount: number;
 
+    // ASSOCIATIONS
+
     @S.BelongsTo(() => Sector)
     sector: Sector;
 

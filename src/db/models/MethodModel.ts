@@ -35,6 +35,8 @@ export default class Method extends S.Model<Method> {
     @S.Column(S.DataType.INTEGER)
     projectDuration: number;
 
+    // ASSOCIATIONS
+
     @S.ForeignKey(() => Sector)
     @S.AllowNull(false)
     @S.Column(S.DataType.INTEGER)

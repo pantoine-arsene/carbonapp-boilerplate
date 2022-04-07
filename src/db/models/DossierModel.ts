@@ -48,6 +48,8 @@ export default class Dossier extends S.Model<Dossier> {
     @S.Column(S.DataType.STRING)
     status: DossierStatus;
 
+    // ASSOCIATIONS
+
     @S.BelongsTo(() => Company)
     representative: Company;
 

@@ -29,6 +29,8 @@ export default class Media extends S.Model<Media> {
     @S.Column(S.DataType.STRING)
     url: string;
 
+    // ASSOCIATIONS
+
     @S.ForeignKey(() => Company)
     @S.Column(S.DataType.INTEGER)
     companyId: number;

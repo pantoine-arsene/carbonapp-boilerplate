@@ -1,6 +1,6 @@
 import * as S from "sequelize-typescript"
-import Cobenefit from './CobenefitModel';
-import Project from './ProjectModel';
+import Cobenefit from '../CobenefitModel';
+import Project from '../ProjectModel';
 
 export interface CreateProjectCobenefitDto {
     image: string;
@@ -10,6 +10,7 @@ export interface CreateProjectCobenefitDto {
 
 /**
  * ProjectCobenefit
+ * Project-Cobenefit joint table
  */
 @S.Table
 export default class ProjectCobenefit extends S.Model<ProjectCobenefit> {

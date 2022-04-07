@@ -32,6 +32,8 @@ export default class Contact extends S.Model<Contact> {
     @S.Column(S.DataType.STRING)
     phone: string;
 
+    // ASSOCIATIONS
+
     @S.HasOne(() => Company)
     company: Company;
 }

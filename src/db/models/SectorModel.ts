@@ -32,6 +32,8 @@ export default class Sector extends S.Model<Sector> {
     @S.Column(S.DataType.STRING)
     description: string;
 
+    // ASSOCIATIONS
+
     @S.HasMany(() => Method)
     methods: Method[];
 

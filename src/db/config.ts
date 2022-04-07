@@ -12,7 +12,7 @@ export const db = new Sequelize({
   dialect: "postgres",
   database: "carbonapp",
   port: PORT,
-  models: [`${__dirname}/models`],
+  models: [`${__dirname}/models`, `${__dirname}/models/jointTables`],
   logging: false
 });
 
