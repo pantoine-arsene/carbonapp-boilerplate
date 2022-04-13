@@ -29,7 +29,7 @@ export default class Dossier extends S.Model<Dossier> {
     @S.PrimaryKey
     @S.AutoIncrement
     @S.Column(S.DataType.INTEGER)
-    id: number
+    id: number;
 
     @S.AllowNull(false)
     @S.Column(S.DataType.STRING)
@@ -54,5 +54,7 @@ export default class Dossier extends S.Model<Dossier> {
     representative: Company;
 
     @S.ForeignKey(() => Company)
+    @S.AllowNull(false)
+    @S.Column(S.DataType.INTEGER)
     representativeId: number;
 }

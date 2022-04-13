@@ -17,7 +17,7 @@ export default class Contact extends S.Model<Contact> {
     @S.PrimaryKey
     @S.AutoIncrement
     @S.Column(S.DataType.INTEGER)
-    id: number
+    id: number;
 
     @S.Column(S.DataType.STRING)
     firstname: string;

@@ -1,25 +1,25 @@
-import Contact, { CreateContactDto } from '../db/models/ContactModel';
+import Project from '../db/models/ProjectModel';
 
 export class ProjectManager {
 
-    public getAll = async (): Promise<Array<Contact>> => {
-        return (Contact.findAll());
+    public getAll = async (): Promise<Array<Project>> => {
+        return (Project.findAll());
     }
 
-    public create = async (createContactDto: CreateContactDto): Promise<Contact> => {
-        return (Contact.create(createContactDto));
+    public create = async (createProjectDto): Promise<Project> => {
+        return (Project.create(createProjectDto));
     }
 
-    public getById = async (id: number): Promise<Contact | null> => {
-        return (Contact.findByPk(id));
+    public getById = async (id: number): Promise<Project | null> => {
+        return (Project.findByPk(id));
     }
 
-    public update = async (id: string, createContactDto: CreateContactDto): Promise<Contact | null> => {
-        const contact = await Contact.findByPk(id);
-        return contact.update(createContactDto);
+    public update = async (id: string, createProjectDto): Promise<Project | null> => {
+        const contact = await Project.findByPk(id);
+        return contact.update(createProjectDto);
     }
 
     public delete = async (id: string): Promise<number> => {
-        return Contact.destroy({where: {id}});
+        return Project.destroy({where: {id}});
     }
 }

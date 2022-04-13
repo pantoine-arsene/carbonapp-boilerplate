@@ -1,4 +1,4 @@
-import Method, { CreateMethodDto } from '../db/models/MethodModel';
+import Method from '../db/models/MethodModel';
 
 export class MethodManager {
 
@@ -6,7 +6,7 @@ export class MethodManager {
         return (Method.findAll());
     }
 
-    public create = async (createMethodDto: CreateMethodDto): Promise<Method> => {
+    public create = async (createMethodDto): Promise<Method> => {
         return (Method.create(createMethodDto));
     }
 
@@ -14,7 +14,7 @@ export class MethodManager {
         return (Method.findByPk(id));
     }
 
-    public update = async (id: string, createMethodDto: CreateMethodDto): Promise<Method | null> => {
+    public update = async (id: string, createMethodDto): Promise<Method | null> => {
         const contact = await Method.findByPk(id);
         return contact.update(createMethodDto);
     }

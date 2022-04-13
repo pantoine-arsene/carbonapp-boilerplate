@@ -70,7 +70,7 @@ export default class Purchase extends S.Model<Purchase> {
     @S.Column({
         type: S.DataType.VIRTUAL,
         get(this: Purchase) {
-            return (this.price - this.intIncome);/* - prix du projet ramené au tonnage du contrat */
+            return (this.price - this.intIncome);/* - prix du projet ramené au tonnage du contrat - partenaire */
         }
     })
     carbonappIncome: number;

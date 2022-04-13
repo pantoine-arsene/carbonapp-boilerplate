@@ -23,10 +23,10 @@ export default class ProjectCobenefit extends S.Model<ProjectCobenefit> {
     @S.ForeignKey(() => Project)
     @S.AllowNull(false)
     @S.Column(S.DataType.INTEGER)
-    projectId: number
+    projectId: number;
   
     @S.ForeignKey(() => Cobenefit)
     @S.AllowNull(false)
     @S.Column(S.DataType.INTEGER)
-    cobenefitId: number
+    cobenefitId: number;
 }

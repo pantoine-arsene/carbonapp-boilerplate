@@ -6,6 +6,7 @@ import Media from './MediaModel';
 import Method from './MethodModel';
 import ProjectCobenefit from './jointTables/ProjectCobenefitsModel';
 import Purchase from './PurchaseModel';
+import Translation from './TranslationModel';
 
 export enum ProjectStatus {
     TO_FUND = "to_fund",
@@ -21,24 +22,17 @@ export interface CreateProjectDto {
  * Project
  */
 @S.Table
+@S.DefaultScope(() => ({include: [
+    {model: Translation, as: "name"}, 
+    {model: Translation, as: "shortDescription"}, 
+    {model: Translation, as: "longDescription"}
+]}))
 export default class Project extends S.Model<Project> {
 
     @S.PrimaryKey
     @S.AutoIncrement
     @S.Column(S.DataType.INTEGER)
     id: number;
-
-    @S.AllowNull(false)
-    @S.Column(S.DataType.STRING)
-    name: string;
-
-    @S.AllowNull(false)
-    @S.Column(S.DataType.STRING)
-    shortDescription: string;
-
-    @S.AllowNull(false)
-    @S.Column(S.DataType.STRING)
-    longDescription: string;
 
     @S.Column(S.DataType.STRING)
     country: string;
@@ -55,6 +49,11 @@ export default class Project extends S.Model<Project> {
     @S.Column(S.DataType.INTEGER)
     totalTonnage: number;
 
+    @S.Column(S.DataType.INTEGER)
+    totalCost: number;
+
+    // totalCost / totalTonnage = avgCost (cout total moyen)
+
     @S.AllowNull(false)
     @S.Column(S.DataType.STRING)
     status: string;
@@ -68,13 +67,29 @@ export default class Project extends S.Model<Project> {
 
     // ASSOCIATIONS
 
-    @S.BelongsTo(() => Method)
-    method: Method;
+    @S.BelongsTo(() => Translation, 'nameId')
+    name: Translation;
 
-    @S.ForeignKey(() => Method)
+    @S.ForeignKey(() => Translation)
     @S.AllowNull(false)
     @S.Column(S.DataType.INTEGER)
-    methodId: number;
+    nameId: number;
+
+    @S.BelongsTo(() => Translation, 'shortDescriptionId')
+    shortDescription: Translation;
+
+    @S.ForeignKey(() => Translation)
+    @S.AllowNull(false)
+    @S.Column(S.DataType.INTEGER)
+    shortDescriptionId: number;
+
+    @S.BelongsTo(() => Translation, 'longDescriptionId')
+    longDescription: Translation;
+
+    @S.ForeignKey(() => Translation)
+    @S.AllowNull(false)
+    @S.Column(S.DataType.INTEGER)
+    longDescriptionId: number;
 
     @S.BelongsTo(() => Company, 'projectHolderId')
     projectHolder: Company;
@@ -83,6 +98,15 @@ export default class Project extends S.Model<Project> {
     @S.AllowNull(false)
     @S.Column(S.DataType.INTEGER)
     projectHolderId: number;
+
+
+    @S.BelongsTo(() => Method)
+    method: Method;
+
+    @S.ForeignKey(() => Method)
+    @S.AllowNull(false)
+    @S.Column(S.DataType.INTEGER)
+    methodId: number;
 
     @S.BelongsTo(() => Company, 'partnerId')
     partner: Company;

@@ -1,5 +1,6 @@
 import * as S from "sequelize-typescript"
 import Sector from './SectorModel';
+import Translation from './TranslationModel';
 
 export interface CreateMethodDto {
     name: string;
@@ -13,16 +14,13 @@ export interface CreateMethodDto {
  * Method
  */
 @S.Table
+@S.DefaultScope(() => ({include: [{model: Translation}]}))
 export default class Method extends S.Model<Method> {
 
     @S.PrimaryKey
     @S.AutoIncrement
     @S.Column(S.DataType.INTEGER)
-    id: number
-
-    @S.AllowNull(false)
-    @S.Column(S.DataType.STRING)
-    name: string;
+    id: number;
  
     @S.Column(S.DataType.STRING)
     image: string;
@@ -36,6 +34,14 @@ export default class Method extends S.Model<Method> {
     projectDuration: number;
 
     // ASSOCIATIONS
+
+    @S.ForeignKey(() => Translation)
+    @S.AllowNull(false)
+    @S.Column(S.DataType.INTEGER)
+    nameId: number;
+
+    @S.BelongsTo(() => Translation)
+    name: Translation;
 
     @S.ForeignKey(() => Sector)
     @S.AllowNull(false)

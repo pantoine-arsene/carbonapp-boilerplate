@@ -26,7 +26,7 @@ export async function onStartup() {
       .catch(err => {
           console.error('Unable to connect to the database:', err);
       });
-  // await db.sync({force: true, }) // - If you need to apply non-retrocompatible changes (will clear the db)
+  //await db.sync({force: true, }) // - If you need to apply non-retrocompatible changes (will clear the db)
   await db.sync({alter: true})
 }
 
